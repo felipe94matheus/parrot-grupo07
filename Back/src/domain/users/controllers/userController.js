@@ -21,8 +21,8 @@ const UserController = {
 
     async findUser (req,res){
         try{
-            const idUser = req.params['id'];
-            const findUser = await Users.findByPk(idUser)
+            
+            const findUser = await UserService.edit(req.params)
 
             if(!findUser){
                 return res.status(404).json("Usuário não encontrado")

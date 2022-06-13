@@ -14,10 +14,19 @@ const UserService = {
         return newUser
     },
 
+    async edit(data){
+        const idUser = data['id']
+        const findUser = await Users.findByPk(idUser)
+
+        return findUser
+
+    },
+
     cripPass(senha){
         const newPass=bcrypt.hashSync(senha,10)
         return newPass
     }
+
 
 }
 
