@@ -1,6 +1,3 @@
-export interface UserLogin {
-    
-}
 export interface User {
     id: number;
     nome: string;
@@ -8,5 +5,11 @@ export interface User {
     senha: string;
     confirmarSenha: string;
     ap: string;
-    imagem: string;
+    imagem?: string;
+}
+
+export interface Post {
+    id: number;
+    userId: number;
+    conteudo: string;
 }
