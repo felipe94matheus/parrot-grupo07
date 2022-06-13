@@ -1,21 +1,18 @@
 const { Users } = require("../../../infrastructure/database/models")
 const Sequelize = require("sequelize")
+const UserService = require("../services/userService")
 
 const UserController = {
 
     async register(req,res){
         try{
-            console.log("ola!")
-            const newUser = await Users.create({
-                ...req.body
-            })
-
+            const {email} = req.body
             const existsUser = await Users.count({where:{email}})
-
+    
             if (existsUser){
-                return res.status(400).json("E-mail já cadastrado!")
+                    return res.status(400).json("E-mail já cadastrado!")
             }
-
+            const newUser = await UserService.register(req.body)
             return res.status(201).json(newUser)
         } catch (error) {
             console.log(error)
