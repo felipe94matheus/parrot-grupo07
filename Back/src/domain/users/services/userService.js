@@ -5,12 +5,18 @@ const Sequelize = require("sequelize")
 const UserService = {
 
     async register(data){
-
+        const{password}=data
         const newUser = await Users.create({
-            ...data
+            ...data,
+            password:this.cripPass(password)
         })
 
         return newUser
+    },
+
+    cripPass(senha){
+        const newPass=bcrypt.hashSync(senha,10)
+        return newPass
     }
 
 }
