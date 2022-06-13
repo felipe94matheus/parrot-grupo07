@@ -31,11 +31,11 @@ const Users = db.define(
       allowNull: false,
     },
     createdAt: {
-      allowNull: true,
+      allowNull: false,
       type: DataTypes.DATE
     },
     updatedAt: {
-      allowNull: true,
+      allowNull: false,
       type: DataTypes.DATE
     }
   },
