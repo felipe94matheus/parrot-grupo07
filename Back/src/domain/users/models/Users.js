@@ -1,4 +1,4 @@
-const db = require("../index");
+const db = require("../../../infrastructure/database/index");
 const { DataTypes } = require("sequelize");
 
 const Users = db.define(
@@ -27,6 +27,10 @@ const Users = db.define(
       allowNull: false,
     },
     status: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
+    adm: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
