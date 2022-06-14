@@ -7,6 +7,7 @@ const registerValidation = validate({
         appartment:Joi.number().required(),
         password:Joi.string().required(),
         status:Joi.number().required(),
+        adm:Joi.number().required(),
     })
 })
 

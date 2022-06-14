@@ -1,4 +1,3 @@
-const { Users } = require("../../../infrastructure/database/models")
 const AuthService = require("../services/authService")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
@@ -23,7 +22,7 @@ const AuthController = {
                 {
                 id_user:userLogin.id_user,
                 email:userLogin.email,
-                name:userLogin.name,
+                adm:userLogin.adm,
                 },
                 secret.key
             )
