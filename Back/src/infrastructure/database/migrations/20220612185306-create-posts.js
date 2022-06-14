@@ -15,15 +15,16 @@ module.exports = {
         allowNull: false,
       },
       createdAt: {
-        allowNull: true,
+        allowNull: false,
         type: DataTypes.DATE
       },
       updatedAt: {
-        allowNull: true,
+        allowNull: false,
         type: DataTypes.DATE
       },
       user_id: {
         type: DataTypes.INTEGER,
+        foreignKew: true,
         references: {
           model: "users",
           key: "id_user"

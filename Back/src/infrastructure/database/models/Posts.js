@@ -1,4 +1,4 @@
-const db = require("../../../infrastructure//database");
+const db = require("../../../infrastructure/database");
 const { DataTypes } = require("sequelize");
 const Users = require("./Users");
 
@@ -16,15 +16,16 @@ const Posts = db.define(
       allowNull: false,
     },
     createdAt: {
-      allowNull: true,
+      allowNull: false,
       type: DataTypes.DATE
     },
     updatedAt: {
-      allowNull: true,
+      allowNull: false,
       type: DataTypes.DATE
     },
     user_id: {
       type: DataTypes.INTEGER,
+      foreignKey: true,
       references: {
         model: "Users",
         key: "id_user"

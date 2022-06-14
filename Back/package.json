@@ -10,6 +10,8 @@
   "author": "Laura Neves",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.18.5",
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.13",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.1",
@@ -17,7 +19,9 @@
     "express-validation": "^4.1.0",
     "joi": "^17.6.0",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.20.1"
+    "sequelize": "^6.20.1",
+    "supertest": "^6.2.3",
+    "ts-node-dev": "^2.0.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.18.2",

@@ -3,7 +3,6 @@ const routes = require('./routes');
 const db = require('./infrastructure/database');
 const trataErros = require('./middleware/trataErros');
 
-
 const app = express();
 
 app.use(express.json());
