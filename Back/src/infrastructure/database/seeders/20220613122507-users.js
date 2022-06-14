@@ -15,6 +15,7 @@ for(let i=0; i<10; i++) {
       appartment: faker.random.numeric(4),
       password: faker.internet.password(),
       status: faker.datatype.boolean(),
+      adm: faker.datatype.boolean(),
       createdAt: new Date(),
       updatedAt: new Date(),
     }

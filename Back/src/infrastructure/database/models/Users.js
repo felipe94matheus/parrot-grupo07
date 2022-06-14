@@ -30,6 +30,10 @@ const Users = db.define(
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
+    adm: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE
