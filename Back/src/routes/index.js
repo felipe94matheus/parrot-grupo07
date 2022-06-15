@@ -10,6 +10,8 @@ const routes = express.Router()
 
 routes.post("/user", UserValidation.registerValidation, UserController.register)
 routes.get("/user/:id", UserValidation.editValidation, UserController.findUser)
+routes.put("/user/:id", auth, UserValidation.updateValidation, UserController.update)
+routes.put("/delete/:id", auth, UserValidation.deleteValidation, UserController.delete)
 
 routes.post("/login", UserValidation.loginValidation, AuthController.login)
 

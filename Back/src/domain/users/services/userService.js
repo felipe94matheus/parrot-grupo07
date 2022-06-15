@@ -14,7 +14,7 @@ const UserService = {
         return newUser
     },
 
-    async edit(data){
+    async findUser(data){
         const idUser = data['id']
         const findUser = await Users.findByPk(idUser)
 
@@ -25,8 +25,50 @@ const UserService = {
     cripPass(senha){
         const newPass=bcrypt.hashSync(senha,10)
         return newPass
-    }
+    },
 
+    isAllowedToEdit(adm, loggedUser, id){
+        if(adm == true || loggedUser == id) {
+            return true
+        }
+
+        return false
+    },
+
+    async updateUser(id, name, email, appartment, status) {
+        await Users.update(
+            {
+                name,
+                email,
+                appartment,
+                status
+            },
+            {
+                where: {
+                    id_user: id
+                },
+            }
+        )
+
+        const updatedUser = await Users.findByPk(id)
+
+        return updatedUser
+    },
+
+    async deleteUser(id, status) {
+        const deletedUser = await Users.update(
+            {
+                status
+            },
+            {
+                where: {
+                    id_user: id
+                },
+            }
+        );
+
+        return deletedUser
+    }
 
 }
 
