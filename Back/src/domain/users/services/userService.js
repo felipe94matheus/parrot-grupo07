@@ -10,14 +10,12 @@ const UserService = {
             ...data,
             password:this.cripPass(password)
         })
-
         return newUser
     },
 
     async edit(data){
         const idUser = data['id']
         const findUser = await Users.findByPk(idUser)
-
         return findUser
 
     },
@@ -25,9 +23,13 @@ const UserService = {
     cripPass(senha){
         const newPass=bcrypt.hashSync(senha,10)
         return newPass
+    },
+
+    async userExists(email){
+        const existsUser = await Users.count({
+            where:{email}
+        })
     }
-
-
 }
 
 module.exports = UserService

@@ -54,7 +54,7 @@ const PostController = {
     async delete(req,res){
         
         try{
-
+        
         const { idPost } = req.params;
         if(await Posts.findByPk(idPost)){
         await Posts.destroy({where: {id_post: idPost}})

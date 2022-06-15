@@ -7,11 +7,12 @@ const UserController = {
     async register(req,res){
         try{
             const {email} = req.body
-            const existsUser = await Users.count({where:{email}})
-    
+            const existsUser = await UserService.userExists(email)    
+
             if (existsUser){
                     return res.status(400).json("E-mail já cadastrado!")
             }
+            
             const newUser = await UserService.register(req.body)
             return res.status(201).json(newUser)
         } catch (error) {
