@@ -13,11 +13,12 @@ justify-content: center;
 align-items: center;
 overflow-x: hidden;
 overflow-y: hidden;
-padding: 5% 0;
+padding: 10% 0;
 `;
 
 export const CardCentral = styled.div`
-max-height: 80vh;
+max-height: 90vh;
+width: 30vw;
 background-color: #fff;
 display: flex;
 flex-direction: column;
@@ -26,7 +27,7 @@ align-items: center;
 text-align: center;
 border-radius: 20px;
 font-family: "Questrial", sans-serif;
-padding: 10% 2%;
+padding: 10% 2%;;
 box-sizing: border-box;
 border: 1px solid #c5c5c5;
 box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);

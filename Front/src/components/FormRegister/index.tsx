@@ -48,15 +48,19 @@ const FormRegister: React.FC = () => {
             <Card.Body>
                 <S.FormCadastro onSubmit={formik.handleSubmit}>
                     <Form.Group>
+                        {formik.errors.nome && <small>{formik.errors.nome}</small>}
                         <S.FormInput
                             id="nome"
                             placeholder="Nome"
                             type="text"
                             value={formik.values.nome}
                             onChange={formik.handleChange}
+                            isInvalid={formik.touched.nome && !!formik.errors.nome}
+                            isValid={formik.touched.nome && !formik.errors.nome}
                         />
                     </Form.Group>
                     <Form.Group>
+                        {formik.errors.email && <small>{formik.errors.email}</small>}
                         <S.FormInput
                             id="email"
                             placeholder="Email"
@@ -68,6 +72,7 @@ const FormRegister: React.FC = () => {
                         />
                     </Form.Group>
                     <Form.Group>
+                        {formik.errors.senha && <small>{formik.errors.senha}</small>}
                         <S.FormInput
                             id="senha"
                             placeholder="Senha"
@@ -79,6 +84,7 @@ const FormRegister: React.FC = () => {
                         />
                     </Form.Group>
                     <Form.Group>
+                        {formik.errors.confirmarSenha && <small>{formik.errors.confirmarSenha}</small>}
                         <S.FormInput
                             id="confirmarSenha"
                             placeholder="Confirmar Senha"
@@ -90,6 +96,7 @@ const FormRegister: React.FC = () => {
                         />
                     </Form.Group>
                     <Form.Group>
+                        {formik.errors.ap && <small>{formik.errors.ap}</small>}
                         <S.FormInput
                             id="ap"
                             placeholder="Apartamento"
@@ -116,18 +123,6 @@ const FormRegister: React.FC = () => {
                     >
                         Cadastrar
                     </S.FormButton>
-                    {formik.errors.email && formik.touched.email
-                        && (
-                            <Alert style={{ marginTop: 15 }} variant="danger">
-                                {formik.errors.email}
-                            </Alert>
-                        )}
-                    {formik.errors.senha && formik.touched.senha
-                        && (
-                            <Alert style={{ marginTop: 15 }} variant="danger">
-                                {formik.errors.senha}
-                            </Alert>
-                        )}
                 </S.FormCadastro>
             </Card.Body>
         </>

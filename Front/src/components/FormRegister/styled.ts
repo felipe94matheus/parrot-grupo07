@@ -7,10 +7,12 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 gap: 2vh;
+box-sizing: border-box;
 `;
 
 export const FormInput = styled(Form.Control)`
 text-align: center;
+width: 20vw;
 padding: 5px;
 border: 1px solid #ccc;
 border-radius: 10px;
@@ -28,7 +30,7 @@ export const FormButton = styled(Button)`
 width: 65%;
   border: none;
   border-radius: 10px;
-  background-color: #76bb4c;
+  background-color: #76bb4c !important;
   padding: 7px 15px;
   font-family: "Questrial";
   font-style: normal;
