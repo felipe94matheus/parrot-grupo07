@@ -7,15 +7,15 @@ const mockPassword = UserService.cripPass("123456")
 
 let seed = []
 
-for(let i=0; i<100; i++) {
+for(let i=0; i<10; i++) {
   seed.push(
     {
       name: faker.name.findName(),
       email: faker.internet.email(),
       appartment: faker.random.numeric(4),
       password: mockPassword,
-      status: faker.datatype.boolean(),
-      adm: false,
+      status: true,
+      adm: true,
       createdAt: new Date(),
       updatedAt: new Date(),
     }
@@ -24,16 +24,6 @@ for(let i=0; i<100; i++) {
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("users", [{
-      name: "teste",
-      email: "email@email.com",
-      appartment: 101,
-      password: UserService.cripPass("senhasecreta"),
-      status: true,
-      adm: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }])
     await queryInterface.bulkInsert("users", seed)
   },
 
