@@ -6,7 +6,6 @@ const AuthController = {
     async login (req,res){
         try{
             const {password} = req.body
-            const {status} = req.body
             const userLogin = await AuthService.login(req.body)
 
             if(!userLogin){
@@ -17,8 +16,8 @@ const AuthController = {
                 return res.status(401).json("E-mail ou senha inválida, verifique e tente novamente")
             }
 
-            if(status==false){
-                return res.status(401).json("Usuário desligado")
+            if(userLogin.status==false){
+                return res.status(401).json("Usuário não é mais morador")
             }
 
             const token = AuthService.generateToken(userLogin.id_user,userLogin.email,userLogin.adm)
