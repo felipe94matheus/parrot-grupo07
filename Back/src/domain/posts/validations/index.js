@@ -1,5 +1,5 @@
 const idValidation =  require('./id.js')
-const postbodyValidation = require('./postbody')
+const postbodyValidation = require('./post.js')
 
 module.exports = {
     idValidation,

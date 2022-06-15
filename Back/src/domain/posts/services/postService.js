@@ -5,6 +5,7 @@ const PostService = {
 
     async register(data,tokenId){
 
+        
         const newPost = await Posts.create({
             ...data,
             user_id: tokenId
@@ -20,6 +21,41 @@ const PostService = {
 
     },
 
+    async getAll(){
+        return await Posts.findAll();   
+    },
+
+    async delete(id){
+        return await Posts.destroy({where: {id_post: id}})
+    },
+
+    async updatePost(id,payloadUpdate){
+
+        return await Posts.update(payloadUpdate, {
+            where: { id_post: id },
+          })
+        
+    },
+
+    async getPostById(id){
+        return await Posts.findByPk(id)
+    },
+
+    async isAuthorized(req, id){
+    return await req.auth.id_user == id || req.auth.adm;
+    },
+
+    async postExists(id){
+        return await Posts.count({
+            where: {
+              id_post: id,
+            },
+          });
+    },
+
+    async isEmpty(data){
+        return data === null;
+    },
     
 }
 

@@ -15,6 +15,7 @@ const UserController = {
             const newUser = await UserService.register(req.body)
             return res.status(201).json(newUser)
         } catch (error) {
+            console.log(error)
             res.status(500).json("Ocorreu um erro")
         }
     },
