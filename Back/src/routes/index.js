@@ -9,7 +9,7 @@ const auth = require("../middleware/auth")
 const routes = express.Router()
 
 routes.post("/user", UserValidation.registerValidation, UserController.register)
-routes.get("/user/:id", UserValidation.editValidation, UserController.findUser)
+routes.get("/user/:id", auth, UserValidation.editValidation, UserController.findUser)
 routes.put("/user/:id", auth, UserValidation.updateValidation, UserController.update)
 routes.put("/delete/:id", auth, UserValidation.deleteValidation, UserController.delete)
 
