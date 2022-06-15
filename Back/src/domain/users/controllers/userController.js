@@ -1,5 +1,3 @@
-const {Users} = require("../models")
-const Sequelize = require("sequelize")
 const UserService = require("../services/userService")
 
 const UserController = {
@@ -10,9 +8,9 @@ const UserController = {
             const existsUser = await UserService.userExists(email)    
 
             if (existsUser){
-                    return res.status(400).json("E-mail já cadastrado!")
+                return res.status(400).json("E-mail já cadastrado!")
             }
-            
+
             const newUser = await UserService.register(req.body)
             return res.status(201).json(newUser)
         } catch (error) {
@@ -23,7 +21,7 @@ const UserController = {
     async findUser (req,res){
         try{
             
-            const findUser = await UserService.edit(req.params)
+            const findUser = await UserService.findUser(req.params)
 
             if(!findUser){
                 return res.status(404).json("Usuário não encontrado")

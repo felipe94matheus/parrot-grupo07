@@ -1,19 +1,38 @@
 const bcrypt = require("bcryptjs")
 const {Users} = require("../models")
-const Sequelize = require("sequelize")
+
 
 const UserService = {
 
     async register(data){
         const{password}=data
+        const{adm}=data
+        const{status}=data
+
+        if(adm==undefined){
+            var newAdm="false"
+        }
+        else{
+            var newAdm=adm
+        }
+
+        if(status==undefined){
+            var newStatus="true"
+        }
+        else{
+            var newStatus=status
+        }
+
         const newUser = await Users.create({
             ...data,
-            password:this.cripPass(password)
+            password:this.cripPass(password),
+            adm:newAdm,
+            status:newStatus
         })
         return newUser
     },
 
-    async edit(data){
+    async findUser(data){
         const idUser = data['id']
         const findUser = await Users.findByPk(idUser)
         return findUser
@@ -29,6 +48,8 @@ const UserService = {
         const existsUser = await Users.count({
             where:{email}
         })
+
+        return existsUser
     }
 }
 

@@ -7,10 +7,8 @@ const PostController = {
     async createPost(req, res)  {
 
         try{
-
             const newPost = await PostService.register(req.body, req.auth.id_user);
             return res.status(201).json(newPost)
-
         }
 
         catch(error){

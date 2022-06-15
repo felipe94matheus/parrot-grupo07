@@ -12,4 +12,6 @@ db.hasConnection();
 app.use(routes);
 app.use(trataErros)
 
-app.listen(4000, () => console.log('Servidor no ar!'));
+// app.listen(4000, () => console.log('Servidor no ar!'));
+
+module.exports=app

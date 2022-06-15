@@ -4,8 +4,8 @@
   "description": "HandsOn 4 - Rede social Parrot - Grupo 7",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/app.js"
+    "test": "jest",
+    "dev": "nodemon src/server.js"
   },
   "author": "Laura Neves",
   "license": "ISC",
