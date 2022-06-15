@@ -50,7 +50,51 @@ const UserService = {
         })
 
         return existsUser
+    },
+    
+    isAllowedToEdit(adm, loggedUser, id){
+        if(adm == true || loggedUser == id) {
+            return true
+        }
+
+        return false
+    },
+
+    async updateUser(id, name, email, appartment, status) {
+        await Users.update(
+            {
+                name,
+                email,
+                appartment,
+                status
+            },
+            {
+                where: {
+                    id_user: id
+                },
+            }
+        )
+
+        const updatedUser = await Users.findByPk(id)
+
+        return updatedUser
+    },
+
+    async deleteUser(id, status) {
+        const deletedUser = await Users.update(
+            {
+                status
+            },
+            {
+                where: {
+                    id_user: id
+                },
+            }
+        );
+
+        return deletedUser
     }
+
 }
 
 module.exports = UserService
