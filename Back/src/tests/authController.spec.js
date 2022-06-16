@@ -2,6 +2,7 @@ const supertest = require("supertest")
 const app = require("../app")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
+const { faker } = require("@faker-js/faker");
 
 //Teste de integração
 describe('No authController, ao executar a função login', () =>{
@@ -10,7 +11,7 @@ describe('No authController, ao executar a função login', () =>{
         const response = await supertest(app)
             .post("/login")
             .send({
-                email:"adele@gmail.com",
+                email:"email@email.com",
                 password:"senhasecreta"
             })
         expect(response.status).toBe(200)
@@ -20,10 +21,40 @@ describe('No authController, ao executar a função login', () =>{
         const response = await supertest(app)
             .post("/login")
             .send({
-                email:"adele@gmail.com",
+                email:"email@email.com",
                 password:"senhasecreta"
             })
-        expect(jwt.verify(response.body,process.env.SECRET,["HS256"])).toMatchObject({"adm": false, "email": "adele@gmail.com", "id_user": 8})
+        expect(jwt.verify(response.body,process.env.SECRET,["HS256"])).toMatchObject({"email": "email@email.com"})
+    })
+
+    test('em caso de e-mail não corresponder ao usuário, deve retornar o status 401', async () => {
+        const response = await supertest(app)
+            .post("/login")
+            .send({
+                email:faker.internet.email(),
+                password:"senhasecreta"
+            })
+        expect(response.status).toBe(401)
+    })
+
+    test('em caso da senha estar errada, deve retornar o status 401', async () => {
+        const response = await supertest(app)
+            .post("/login")
+            .send({
+                email:"email@email.com",
+                password:"senhaerrada"
+            })
+        expect(response.status).toBe(401)
+    })
+
+    test('em caso do usuário estar desligado, deve retornar o status 401', async () => {
+        const response = await supertest(app)
+            .post("/login")
+            .send({
+                email:"email2@email.com",
+                password:"senhasecreta"
+            })
+        expect(response.status).toBe(401)
     })
 
 

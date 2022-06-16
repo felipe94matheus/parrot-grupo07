@@ -1,23 +1,25 @@
 const AuthService = require("../domain/users/services/authService")
 const { faker } = require("@faker-js/faker");
-const bcrypt=require("bcryptjs")
+const bcrypt=require("bcryptjs");
+const { createFalse } = require("typescript");
 require("dotenv").config()
+const jwt = require("jsonwebtoken")
 
 //Testes unitários
 describe ('testes unitários authService', () => {
 
-    describe('método generateToken', () => {
-        
-        const id=faker.datatype.number()
-        const email=faker.internet.email()
-        const adm=faker.datatype.boolean()
+    const id=faker.datatype.number()
+    const email=faker.internet.email()
+    const adm=faker.datatype.boolean()
+
+    describe('método generateToken', () => {        
 
         test('deve retornar um token (string)', () => {
             expect(typeof AuthService.generateToken(id,email,adm)).toBe("string")
         })
 
         test('deve retornar um token válido', () => {
-            expect(jwt.verify(AuthService.generateToken(id,email,adm)),process.env.SECRET,["HS256"]).toBe("string")
+            expect(jwt.verify(AuthService.generateToken(id,email,adm),process.env.SECRET,["HS256"])).toMatchObject({"adm": adm, "email": email, "id_user": id})
         })
 
 
@@ -33,8 +35,29 @@ describe ('testes unitários authService', () => {
         })
 
         test('deve retornar false, por que as senhas não são equivalentes', ()=>{
-            expect(AuthService.uncripPass(passLoginFalse,passDataBase)).toMatchObject({"adm": false, "email": "adele@gmail.com", "id_user": 8})
+            expect(AuthService.uncripPass(passLoginFalse,passDataBase)).toBe(false)
         })
+    })
+
+    describe('método login', () => {
+        const loginData = {
+            "email":"email@email.com",
+            "senha":"senhasecreta"
+        }
+
+        const loginFakeData = {
+            "email":"emailfalse@email.com",
+            "senha":"senhasecreta"
+        }
+
+        test('deve retornar 1', async ()=>{
+            expect(await AuthService.login(loginData)).toMatchObject({"adm": false, "appartment": 301,"email": "email@email.com","name": "Laura", "password": "$2a$10$bgCt0K3NeabwDhEIPulmweKS/dxiWAkQlQZwBBHnKUogKyTNmuHU2", "status": true})
+        })
+
+        test('deve retornar null', async ()=>{
+            expect(await AuthService.login(loginFakeData)).toBe(null)
+        })
+
     })
 
 
