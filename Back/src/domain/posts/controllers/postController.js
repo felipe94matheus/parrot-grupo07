@@ -6,7 +6,6 @@ const PostController = {
 
     async createPost(req, res)  {
 
-
         try{
             const newPost = await PostService.register(req.body, req.auth.id_user);
             return res.status(201).json(newPost)
@@ -42,54 +41,53 @@ const PostController = {
 
         try {
         
-          const feed = await PostService.getAll();
-          if(await PostService.isEmpty(feed)) return res.status(201).json('No momento, não há posts para exibir')
+        const feed = await PostService.getAll();
+        if(await PostService.isEmpty(feed)) return res.status(201).json('No momento, não há posts para exibir')
           
-          return res.json(feed);
+        return res.json(feed);
 
         } catch (error) {
 
-          return res.status(500).json("Os posts não puderam ser carregados");
+        return res.status(500).json("Os posts não puderam ser carregados");
         
         }
       },
 
     async delete(req,res){
         
-        const { idPost } = req.params;
-        if(!await PostService.postExists(idPost)) return res.status(404).json('Post inexistente')
-    
-        const { user_id } = await PostService.getPostById(idPost)
-        
-        if(await PostService.isAuthorized(req,user_id)){
-        
         try{
+            const { idPost } = req.params;
+            if(!await PostService.postExists(idPost)) return res.status(404).json('Post inexistente')
         
-        if(PostService.delete(idPost))
-        return res.status(204).json('Post deletado com sucesso!')         
+            const { user_id } = await PostService.getPostById(idPost)
+            
+            if(await PostService.isAuthorized(req,user_id)){
+             
+                if(PostService.delete(idPost)){
+                    return res.status(204).json('Post deletado com sucesso!')         
+                }
     
-        
+            } else { res.status(401).json('Unauthorized')}
         } catch(error) {
 
-        console.log(error)
+            console.log(error)
             res.status(500).json('Ocorreu um erro ao deletar post.')
+
         }
-    
-        } else { res.status(401).json('Unauthorized')}
     },
 
     async update(req,res){
 
-        const { idPost } = req.params;
-        if(!await PostService.postExists(idPost)) return res.status(404).json('Post inexistente')
-        
-
-        const actualPost = await PostService.getPostById(idPost);
-        if(actualPost.content === req.body.content) return res.status(200).json('Não houveram mudanças no Post')
-        
-        if(await PostService.isAuthorized(req,actualPost.user_id)){
-
         try{
+
+            const { idPost } = req.params;
+            if(!await PostService.postExists(idPost)) return res.status(404).json('Post inexistente')
+            
+    
+            const actualPost = await PostService.getPostById(idPost);
+            if(actualPost.content === req.body.content) return res.status(200).json('Não houveram mudanças no Post')
+            
+            if(await PostService.isAuthorized(req,actualPost.user_id)){
             const payloadUpdate = {};
             Object.assign(payloadUpdate, req.body)
             
@@ -98,16 +96,13 @@ const PostController = {
             res.status(200).json(updatedPost)
             }
          
+        } else { res.status(401).json('Unauthorized')}
 
         } catch(error) {
             console.log(error)
             return res.status(500).json("Algo deu errado ao atualizar o post");
-
         }
-    
-    } else { res.status(401).json('Unauthorized')}
-    
-}
+},
 
 }
 

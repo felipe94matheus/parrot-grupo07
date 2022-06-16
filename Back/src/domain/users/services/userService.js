@@ -55,7 +55,7 @@ const UserService = {
         return existsUser
     },
     
-    isAllowedToEdit(adm, loggedUser, id){
+    isAuthorized(adm, loggedUser, id){
         if(adm == true || loggedUser == id) {
             return true
         }

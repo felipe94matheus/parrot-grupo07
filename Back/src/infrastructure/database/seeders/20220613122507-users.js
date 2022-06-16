@@ -24,7 +24,8 @@ for(let i=0; i<100; i++) {
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("users", [{
+    await queryInterface.bulkInsert("users", [
+      {
       name: "teste",
       email: "email@email.com",
       appartment: 101,
@@ -33,7 +34,18 @@ module.exports = {
       adm: true,
       createdAt: new Date(),
       updatedAt: new Date(),
-    }])
+    },
+    {
+      name: "teste2",
+      email: "email2@email.com",
+      appartment: 102,
+      password: UserService.cripPass("senhasecreta"),
+      status: false,
+      adm: true,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }
+    ])
     await queryInterface.bulkInsert("users", seed)
   },
 

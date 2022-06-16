@@ -23,9 +23,14 @@ const UserController = {
         try{
             
             const findUser = await UserService.findUser(req.params)
+            const isAuthorized = UserService.isAuthorized(findUser.adm, findUser.id_user, req.auth.id_user)
 
             if(findUser === false){
                 return res.status(404).json("Usuário não encontrado")
+            }
+
+            if(isAuthorized == false) {
+                return res.status(401).json("Ocorreu um erro. Você não possui esse acesso!")
             }
             
             return res.status(200).json(findUser)
@@ -41,14 +46,14 @@ const UserController = {
             const { id } = req.params
             const adm = req.auth.adm
             const { name, email, appartment, status } = req.body
-            const isAllowedToEdit = await UserService.isAllowedToEdit(adm, loggedUser, id)
-            const existsUser = await UserService.findUser(req.params)
-
-            if(existsUser === false) {
+            const isAuthorized = UserService.isAuthorized(adm, loggedUser, id)
+            const existsUser = UserService.findUser(id)
+            
+            if(!existsUser) {
                 return res.status(404).json("Usuário não encontrado")
             }
             
-            if(isAllowedToEdit == false) {
+            if(isAuthorized == false) {
                 return res.status(401).json("Você não pode alterar este usuário")
             }
 
@@ -66,14 +71,14 @@ const UserController = {
             const { id } = req.params
             const adm = req.auth.adm
             const { status } = req.body
-            const isAllowedToEdit = await UserService.isAllowedToEdit(adm, loggedUser, id)
-            const existsUser = await UserService.findUser(req.params)
+            const isAuthorized = await UserService.isAuthorized(adm, loggedUser, id)
+            const existsUser = UserService.findUser(id)
             
             if(existsUser === false) {
                 return res.status(404).json("Usuário não encontrado")
             }
             
-            if(isAllowedToEdit === false) {
+            if(isAuthorized == false) {
                 return res.status(401).json("Você não pode deletar este usuário")
             }
             
