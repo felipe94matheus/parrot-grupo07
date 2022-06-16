@@ -54,7 +54,10 @@ const PostService = {
     },
 
     async isEmpty(data){
-        return data === null;
+        if (data=[]){
+            return true;
+        }
+        return false
     },
     
 }

@@ -15,7 +15,7 @@ const UserController = {
             return res.status(201).json(newUser)
         } catch (error) {
             console.log(error)
-            res.status(500).json("Ocorreu um erro")
+            res.status(500).json("Ocorreu um erro ao cadastrar o usuário")
         }
     },
 
@@ -36,7 +36,7 @@ const UserController = {
             return res.status(200).json(findUser)
             
         } catch (error){
-            res.status(500).json("Ocorreu um erro")
+            res.status(500).json("Ocorreu um erro ao encontrar o usuário")
         }
     },
 
@@ -47,9 +47,10 @@ const UserController = {
             const adm = req.auth.adm
             const { name, email, appartment, status } = req.body
             const isAuthorized = UserService.isAuthorized(adm, loggedUser, id)
-            const existsUser = UserService.findUser(id)
+            const findUser = await UserService.findUser(req.params)
             
-            if(!existsUser) {
+    
+            if(!findUser) {
                 return res.status(404).json("Usuário não encontrado")
             }
             
@@ -61,7 +62,7 @@ const UserController = {
             return res.status(200).json(updatedUser)
             
         } catch (error){
-            res.status(500).json("Ocorreu um erro")
+            res.status(500).json("Ocorreu um erro ao atualizar o usuário")
         }
     },
 
@@ -72,9 +73,9 @@ const UserController = {
             const adm = req.auth.adm
             const { status } = req.body
             const isAuthorized = await UserService.isAuthorized(adm, loggedUser, id)
-            const existsUser = UserService.findUser(id)
+            const findUser = await UserService.findUser(id)
             
-            if(existsUser === false) {
+            if(!findUser) {
                 return res.status(404).json("Usuário não encontrado")
             }
             
@@ -86,7 +87,7 @@ const UserController = {
             return res.status(204).json(deletedUser)
                    
         } catch (error){
-            res.status(500).json("Ocorreu um erro")
+            res.status(500).json("Ocorreu um erro ao deletar o usuário")
         }
     }
 }

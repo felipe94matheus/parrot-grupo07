@@ -31,7 +31,7 @@ const PostController = {
         
         } catch(error) {
             console.log(error)
-            res.status(500).json('Algo deu errado ao verificar os posts do usuário')
+            res.status(500).json('Algo deu errado ao verificar os posts desse usuário')
         }
 
     },
@@ -83,7 +83,7 @@ const PostController = {
             if(!await PostService.postExists(id)) return res.status(404).json('Post inexistente')
             
             const actualPost = await PostService.getPostById(id);
-            if(actualPost.content === req.body.content) return res.status(200).json('Não houveram mudanças no Post')
+            if(actualPost.content === req.body.content) return res.status(200).json('Não houve mudanças no Post')
             
             if(await PostService.isAuthorized(req,actualPost.user_id)){
             const payloadUpdate = {};
