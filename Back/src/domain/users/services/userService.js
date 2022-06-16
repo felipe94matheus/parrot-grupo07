@@ -39,6 +39,7 @@ const UserService = {
         if(findUser === null) {
             return false
         }
+
         return findUser
     },
 
@@ -78,7 +79,6 @@ const UserService = {
         )
 
         const updatedUser = await Users.findByPk(id)
-
         return updatedUser
     },
 

@@ -159,14 +159,12 @@ describe('No userController, ao executar a função', () => {
 
     describe('update', () => {
         test('em caso de sucesso, deve retornar o status 200', async () => {
-            const emailTeste = faker.internet.email()
             const token = await AuthService.generateToken(1, "email@email.com", true)
             const response = await supertest(app)
             .put("/user/3")
             .auth(token, { type: 'bearer' })
             .send({
                 name: "Laura",
-                email: emailTeste,
                 appartment: 301,
                 status: true,
             })
@@ -175,14 +173,12 @@ describe('No userController, ao executar a função', () => {
         })
 
         test('em caso de sucesso, retornar response do request', async () => {
-            const emailTeste = faker.internet.email()
             const token = await AuthService.generateToken(1, "email@email.com", true)
             const response = await supertest(app)
             .put("/user/2")
             .auth(token, { type: 'bearer' })
             .send({
                 name: "Laura",
-                email: emailTeste,
                 appartment: 301,
                 status: true
             })
@@ -202,14 +198,12 @@ describe('No userController, ao executar a função', () => {
         })
 
         test('em caso de id não encontrado, retornar status 404', async () => {
-            const emailTeste = faker.internet.email()
             const token = await AuthService.generateToken(1, "email@email.com", true)
             const response = await supertest(app)
             .put("/user/16585432")
             .auth(token, { type: 'bearer' })
             .send({
                 name: "Laura",
-                email: emailTeste,
                 appartment: 301,
                 status: true,
             })

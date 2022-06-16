@@ -49,7 +49,7 @@ const UserController = {
             const findUser = await UserService.findUser(req.params)
             
     
-            if(!findUser) {
+            if(findUser === false) {
                 return res.status(404).json("Usuário não encontrado")
             }
             
