@@ -1,10 +1,12 @@
-import { useState } from 'react';
 import logoColorido from '../../assets/logoColorido.png';
 import * as S from './styled';
 import { useFormik } from 'formik';
-import { Button, Card, Form, Alert } from 'react-bootstrap';
+import { Button, Card, Form } from 'react-bootstrap';
 import * as Yup from 'yup';
-import { createUser } from '../../services/auth';
+import { createUser, baseUrl } from '../../services/auth';
+import { signIn } from '../../store/users';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const validationSchema = Yup.object({
     nome: Yup.string()
@@ -14,8 +16,8 @@ const validationSchema = Yup.object({
         .required("Email é obrigatório"),
     senha: Yup.string()
         .required("senha é obrigatório")
-        .min(6, "A senha deve ter pelo menos 6 caracteres")
-        .max(12, "A senha deve ter no máximo 12 caracteres"),
+        .min(5, "A senha deve ter pelo menos 6 caracteres")
+        .max(15, "A senha deve ter no máximo 12 caracteres"),
     confirmarSenha: Yup.string()
         .oneOf([Yup.ref('senha'), null], 'As senhas não conferem')
         .required("Confirmação de senha é obrigatório"),
@@ -24,6 +26,8 @@ const validationSchema = Yup.object({
     // imagem: Yup.string()
 });
 const FormRegister: React.FC = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
             nome: '',
@@ -37,8 +41,12 @@ const FormRegister: React.FC = () => {
         validationSchema,
 
         onSubmit: async values => {
-            const postUser = await createUser(values);
-            alert(JSON.stringify(postUser, null, 2));
+            const { accessToken, user } = await createUser({ ...values, permission: 1 });
+            dispatch(signIn({ accessToken, permission: user.permission}));
+            //@ts-ignore
+            baseUrl.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+            navigate('/login');
+
         }
     });
     return (

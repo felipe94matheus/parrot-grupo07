@@ -1,9 +1,12 @@
 import logoColorido from '../../assets/logoColorido.png';
 import * as S from './styled';
 import { useFormik } from 'formik';
-import { Button, Card, Form, Alert } from 'react-bootstrap';
+import { Button, Card, Form } from 'react-bootstrap';
 import * as Yup from 'yup';
-import { postsignIn } from '../../services/auth';
+import { postsignIn, baseUrl } from '../../services/auth';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { signIn } from '../../store/users';
 
 const validationSchema = Yup.object({
     email: Yup.string()
@@ -11,10 +14,12 @@ const validationSchema = Yup.object({
         .required("Email é obrigatório"),
     senha: Yup.string()
         .required("senha é obrigatório")
-        .min(6, "A senha deve ter pelo menos 6 caracteres")
-        .max(12, "A senha deve ter no máximo 12 caracteres"),
+        .min(5, "A senha deve ter pelo menos 6 caracteres")
+        .max(15, "A senha deve ter no máximo 12 caracteres"),
 });
 const FormLogin: React.FC = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -24,8 +29,11 @@ const FormLogin: React.FC = () => {
         validationSchema,
 
         onSubmit: async values => {
-            const postLogin = await postsignIn(values);
-            alert(JSON.stringify(postLogin, null, 2));
+            const { accessToken, user } = await postsignIn(values);
+            dispatch(signIn({accessToken, permission: user.permission}));
+            //@ts-ignore
+            baseUrl.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+            navigate('/feed');
         }
     });
     return (
