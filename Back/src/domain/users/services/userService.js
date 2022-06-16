@@ -63,11 +63,10 @@ const UserService = {
         return false
     },
 
-    async updateUser(id, name, email, appartment, status) {
+    async updateUser(id, name, appartment, status) {
         await Users.update(
             {
                 name,
-                email,
                 appartment,
                 status
             },
@@ -83,10 +82,10 @@ const UserService = {
         return updatedUser
     },
 
-    async deleteUser(id, status) {
+    async deleteUser(id, deletedSatus) {
         const deletedUser = await Users.update(
             {
-                status
+                status: deletedSatus
             },
             {
                 where: {

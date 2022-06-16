@@ -21,11 +21,10 @@ const UserController = {
 
     async findUser (req,res){
         try{
-            
             const findUser = await UserService.findUser(req.params)
-            const isAuthorized = UserService.isAuthorized(findUser.adm, findUser.id_user, req.auth.id_user)
+            const isAuthorized = UserService.isAuthorized(req.auth.adm, req.auth.id_user, req.params.id)
 
-            if(findUser === false){
+            if(!findUser){
                 return res.status(404).json("Usuário não encontrado")
             }
 
@@ -45,7 +44,7 @@ const UserController = {
             const loggedUser = req.auth.id_user
             const { id } = req.params
             const adm = req.auth.adm
-            const { name, email, appartment, status } = req.body
+            const { name, appartment, status } = req.body
             const isAuthorized = UserService.isAuthorized(adm, loggedUser, id)
             const findUser = await UserService.findUser(req.params)
             
@@ -58,7 +57,7 @@ const UserController = {
                 return res.status(401).json("Você não pode alterar este usuário")
             }
 
-            const updatedUser = await UserService.updateUser(id, name, email, appartment, status)
+            const updatedUser = await UserService.updateUser(id, name, appartment, status)
             return res.status(200).json(updatedUser)
             
         } catch (error){
@@ -71,10 +70,10 @@ const UserController = {
             const loggedUser = req.auth.id_user
             const { id } = req.params
             const adm = req.auth.adm
-            const { status } = req.body
+            const deletedSatus = false
             const isAuthorized = await UserService.isAuthorized(adm, loggedUser, id)
-            const findUser = await UserService.findUser(id)
-            
+            const findUser = await UserService.findUser(req.params)
+
             if(!findUser) {
                 return res.status(404).json("Usuário não encontrado")
             }
@@ -83,7 +82,7 @@ const UserController = {
                 return res.status(401).json("Você não pode deletar este usuário")
             }
             
-            const deletedUser = await UserService.deleteUser(id, status)
+            const deletedUser = await UserService.deleteUser(id, deletedSatus)
             return res.status(204).json(deletedUser)
                    
         } catch (error){
