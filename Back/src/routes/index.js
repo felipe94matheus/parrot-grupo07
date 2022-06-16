@@ -18,7 +18,7 @@ routes.post("/login", UserValidation.loginValidation, AuthController.login)
 routes.post("/post", auth, PostValidation.postbodyValidation, PostController.createPost)
 routes.get("/post/:id", auth, PostValidation.idValidation, PostController.getPostByUserId)
 routes.get("/feed", auth, PostController.getAll)
-routes.delete("/post/:idPost", auth, PostValidation.idValidation, PostController.delete)
-routes.put("/post/:idPost", auth, PostValidation.idValidation, PostController.update)
+routes.delete("/post/:id", auth, PostValidation.idValidation, PostController.delete)
+routes.put("/post/:id", auth, PostValidation.idValidation, PostController.update)
 
 module.exports = routes

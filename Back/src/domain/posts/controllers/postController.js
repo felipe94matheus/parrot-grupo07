@@ -56,14 +56,14 @@ const PostController = {
     async delete(req,res){
         
         try{
-            const { idPost } = req.params;
-            if(!await PostService.postExists(idPost)) return res.status(404).json('Post inexistente')
+            const { id } = req.params;
+            if(!await PostService.postExists(id)) return res.status(404).json('Post inexistente')
         
-            const { user_id } = await PostService.getPostById(idPost)
+            const { user_id } = await PostService.getPostById(id)
             
             if(await PostService.isAuthorized(req,user_id)){
              
-                if(PostService.delete(idPost)){
+                if(PostService.delete(id)){
                     return res.status(204).json('Post deletado com sucesso!')         
                 }
     
@@ -79,20 +79,18 @@ const PostController = {
     async update(req,res){
 
         try{
-
-            const { idPost } = req.params;
-            if(!await PostService.postExists(idPost)) return res.status(404).json('Post inexistente')
+            const { id } = req.params;
+            if(!await PostService.postExists(id)) return res.status(404).json('Post inexistente')
             
-    
-            const actualPost = await PostService.getPostById(idPost);
+            const actualPost = await PostService.getPostById(id);
             if(actualPost.content === req.body.content) return res.status(200).json('Não houveram mudanças no Post')
             
             if(await PostService.isAuthorized(req,actualPost.user_id)){
             const payloadUpdate = {};
             Object.assign(payloadUpdate, req.body)
             
-            if(await PostService.updatePost(idPost, payloadUpdate)){            
-            const updatedPost = await PostService.getPostById(idPost);
+            if(await PostService.updatePost(id, payloadUpdate)){            
+            const updatedPost = await PostService.getPostById(id);
             res.status(200).json(updatedPost)
             }
          
