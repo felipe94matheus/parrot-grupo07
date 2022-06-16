@@ -9,16 +9,16 @@ const auth = require("../middleware/auth")
 const routes = express.Router()
 
 routes.post("/user", UserValidation.registerValidation, UserController.register)
-routes.get("/user/:id", UserValidation.editValidation, UserController.findUser)
+routes.get("/user/:id", auth, UserValidation.editValidation, UserController.findUser)
 routes.put("/user/:id", auth, UserValidation.updateValidation, UserController.update)
 routes.put("/delete/:id", auth, UserValidation.deleteValidation, UserController.delete)
 
 routes.post("/login", UserValidation.loginValidation, AuthController.login)
 
 routes.post("/post", auth, PostValidation.postbodyValidation, PostController.createPost)
-routes.get("/post/:id", PostValidation.idValidation, PostController.getPostByUserId)
-routes.get("/feed", PostController.getAll)
-routes.delete("/post/:idPost", PostController.delete)
-routes.put("/post/:idPost", PostController.update)
+routes.get("/post/:id", auth, PostValidation.idValidation, PostController.getPostByUserId)
+routes.get("/feed", auth, PostController.getAll)
+routes.delete("/post/:idPost", auth, PostValidation.idValidation, PostController.delete)
+routes.put("/post/:idPost", auth, PostValidation.idValidation, PostController.update)
 
 module.exports = routes

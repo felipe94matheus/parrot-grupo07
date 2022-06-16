@@ -35,8 +35,11 @@ const UserService = {
     async findUser(data){
         const idUser = data['id']
         const findUser = await Users.findByPk(idUser)
+        
+        if(findUser === null) {
+            return false
+        }
         return findUser
-
     },
 
     cripPass(senha){

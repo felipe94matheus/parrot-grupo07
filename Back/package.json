@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "create db": "npx sequelize-cli db:create",
+    "migrations": "npx sequelize-cli db:migrate",
+    "seeders": "npx sequelize-cli db:seed:all"
   },
   "author": "Laura Neves",
   "license": "ISC",

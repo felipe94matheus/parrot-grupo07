@@ -14,6 +14,7 @@ const UserController = {
             const newUser = await UserService.register(req.body)
             return res.status(201).json(newUser)
         } catch (error) {
+            console.log(error)
             res.status(500).json("Ocorreu um erro")
         }
     },
@@ -23,7 +24,7 @@ const UserController = {
             
             const findUser = await UserService.findUser(req.params)
 
-            if(!findUser){
+            if(findUser === false){
                 return res.status(404).json("Usuário não encontrado")
             }
             
@@ -41,9 +42,9 @@ const UserController = {
             const adm = req.auth.adm
             const { name, email, appartment, status } = req.body
             const isAllowedToEdit = await UserService.isAllowedToEdit(adm, loggedUser, id)
-            const existsUser = UserService.findUser(id)
-            
-            if(!existsUser) {
+            const existsUser = await UserService.findUser(req.params)
+
+            if(existsUser === false) {
                 return res.status(404).json("Usuário não encontrado")
             }
             
@@ -66,17 +67,17 @@ const UserController = {
             const adm = req.auth.adm
             const { status } = req.body
             const isAllowedToEdit = await UserService.isAllowedToEdit(adm, loggedUser, id)
-            const existsUser = UserService.findUser(id)
+            const existsUser = await UserService.findUser(req.params)
             
-            if(!existsUser) {
+            if(existsUser === false) {
                 return res.status(404).json("Usuário não encontrado")
             }
             
-            if(isAllowedToEdit == false) {
+            if(isAllowedToEdit === false) {
                 return res.status(401).json("Você não pode deletar este usuário")
             }
             
-            const deletedUser = await UserService.deleteUser(id,status)
+            const deletedUser = await UserService.deleteUser(id, status)
             return res.status(204).json(deletedUser)
                    
         } catch (error){
