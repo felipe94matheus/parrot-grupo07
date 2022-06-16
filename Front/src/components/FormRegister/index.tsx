@@ -23,7 +23,7 @@ const validationSchema = Yup.object({
         .required("Confirmação de senha é obrigatório"),
     ap: Yup.string()
         .required("AP é obrigatório"),
-    // imagem: Yup.string()
+    imagem: Yup.string()
 });
 const FormRegister: React.FC = () => {
     const dispatch = useDispatch();
@@ -34,19 +34,22 @@ const FormRegister: React.FC = () => {
             email: '',
             senha: '',
             confirmarSenha: '',
-            ap: 0,
-            // imagem: '',
+            ap: '',
+            imagem: '',
         },
 
         validationSchema,
 
         onSubmit: async values => {
-            const { accessToken, user } = await createUser({ ...values, permission: 1 });
-            dispatch(signIn({ accessToken, permission: user.permission}));
-            //@ts-ignore
-            baseUrl.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
-            navigate('/login');
-
+            const a = await createUser({
+                nome: values.nome,
+                senha: values.senha,
+                email: values.email,
+                ap: values.ap,
+                imagem: "felipe"
+            })
+            console.log(values.senha)
+            
         }
     });
     return (
@@ -126,7 +129,6 @@ const FormRegister: React.FC = () => {
                     </Form.Group> */}
                     <S.FormButton
                         type="submit"
-                        variant="primary"
                         disabled={!formik.isValid}
                     >
                         Cadastrar

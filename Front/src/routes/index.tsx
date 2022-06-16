@@ -14,12 +14,7 @@ const MyRoutes: React.FC = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
-                {/* <Route path="/feed" element={
-                    <RequireAuth>
-                    <Feed />
-                    </RequireAuth>
-                } />  */}
-            
+                {/* <Route path="/feed" element={login ? <Feed /> : <Login />} /> */}
             </Routes>
         </Router>
     );

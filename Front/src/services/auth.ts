@@ -1,4 +1,5 @@
 import axios from "axios";
+import { User } from "../components/types";
 import { Permission } from "../store/users"
 
 interface SignIn {
@@ -6,26 +7,15 @@ interface SignIn {
     senha: string;
 }
 
-interface User extends SignIn {
-    id: number;
-    nome: string;
-    confirmarSenha: string;
-    ap: number;
-    // imagem: string;
-    permission: Permission;
-}
-
-
 export const baseUrl = axios.create({
     baseURL: "http://localhost:3333",
 });
 
-export const createUser = async (user: Omit<User, "id">) => {
+export const createUser = async (user: Omit<User, "id">):Promise<User> => {
     try {
-        const response = await baseUrl.post("/register", user)
-        return response.data
-    } catch (error: any) {
-        alert("Error: " + error.response.data)
+        return await baseUrl.post("/register", user)
+    } catch (error) {
+        return error as unknown as User;
     }
 }
 

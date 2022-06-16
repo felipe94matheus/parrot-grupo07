@@ -33,7 +33,7 @@ const FormLogin: React.FC = () => {
             dispatch(signIn({accessToken, permission: user.permission}));
             //@ts-ignore
             baseUrl.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
-            navigate('/feed');
+            // navigate('/feed');
         }
     });
     return (
