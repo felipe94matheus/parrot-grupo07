@@ -1,0 +1,27 @@
+{
+  "register": [
+    {
+      "nome": "Felipe Matheus",
+      "email": "felipe774@gmail.com",
+      "senha": "123456",
+      "confirmarSenha": "123456",
+      "ap": 12,
+      "id": 1
+    },
+    {
+      "nome": "Felipe Matheus",
+      "email": "felipe774@gmail.com",
+      "senha": "123456",
+      "confirmarSenha": "123456",
+      "ap": 85,
+      "id": 2
+    }
+  ],
+  "signIn": [
+    {
+      "email": "felipe@gmail.com",
+      "senha": "123456",
+      "id": 1
+    }
+  ]
+}
