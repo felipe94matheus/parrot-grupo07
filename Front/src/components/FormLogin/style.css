@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&family=Roboto:wght@100;300&display=swap');
+
+div {
+    font-family: 'Questrial', sans-serif;
+}
+
+
+@media screen and (max-width:502px) {
+    img.ocult-img {
+        display: none;
+     }
+}
+
+
+.background {
+    width: 100vw;
+    height: 100vh;
+    background: url("../../assets/BACKGROUND.png") center center/cover;
+    background-color: rgba(0, 0, 0, 0.7);
+    background-blend-mode: color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerForm {
+    width: 33%;
+    border: 1px solid #909090;
+    background-color: #fff;
+    padding: 3%;
+}
+
+.divImage, h3  {
+    text-align: center;
+}
+
+.divImage img {
+    height: 161px;
+}
+
+h3 {
+    margin-bottom: 7% !important;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+input::placeholder {
+    text-align: center;
+    color: #909090;
+}
+
+button {
+    background-color: #76BB4C !important;
+    border: transparent !important;
+    border-radius: 10px !important;
+    color: #000 !important;
+}
+
+.divLinkCadastro {
+    text-align: center;
+    margin-top: 7%;
+}
+
+.divLinkCadastro a {
+    text-decoration: none;
+    color: #555555;
+    transition: ease-in-out 0.2s;
+}
+
+.divLinkCadastro a:hover {
+    color: #76BB4C;
+}

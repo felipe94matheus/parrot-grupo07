@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&family=Roboto:wght@100;300&display=swap');
+
+div {
+    font-family: 'Questrial', sans-serif;
+}
+
+div.containerProfile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: 0px 13px 21px 0px rgba(111, 111, 111, 0.192);
+    height: 200px;
+    max-height: 250px;
+    font-weight: bold;
+}
+
+div.userContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+}
+
+div.userContent img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    margin-right: 10%;
+    margin-left: 5%;
+    transition: 0.3s;
+}
+
+@media screen and (max-width: 375px) {
+    div.userContent img {
+        display: none;
+    }
+}
+
+div.userContent img:hover {
+    width: 6.4rem;
+    height: 6.4rem;
+}
+
+div.contentProfile {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+}
+
+div.contentProfile li {
+    list-style-type: none;
+    padding-bottom: 5px;
+}
+
+div.contentProfile h4 {
+    color: #8DC44D;
+    width: 300px;
+}
+
+@media screen and (max-width: 729px) {
+    button.buttonEdit {
+        display: none;
+    }
+}
+
+div.contentProfile h4:hover {
+    color: #5d3aae7e;
+    cursor: context-menu;
+}
+
+div.buttonProfile {
+
+    display: flex;
+    align-self: start;
+    margin: auto 34px;
+}
+
+button.buttonEdit {
+    width: 10rem;
+    background-color: #8DC44D !important;
+    border-radius: 20px !important;
+    border: transparent !important;
+    padding: 4px 33px !important;
+    color: rgb(255, 255, 255) !important;
+    transition: 0.3s ease-in-out !important;
+    font-weight: 100 !important;
+}
+
+button.buttonEdit:hover {
+    background-color: #8dc44d !important;
+    color: white !important;
+    font-weight: 100 !important;
+    border-radius: 25px !important;
+    border: transparent !important;
+    padding: 4px 33px !important;
+    margin-top: 5px !important;
+    box-shadow: 0px -4px 8px #00000034 !important;
+}
+
+@media screen and (max-width: 729px) {
+    div.buttonProfile {
+        width: 2px;
+    }
+}
