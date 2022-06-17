@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&family=Roboto:wght@100;300&display=swap');
+
+div {
+    font-family: 'Questrial', sans-serif;
+}
+
+div.containerPostFeed {
+    display: flex;
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    min-height: 35%;
+    max-height: 35%;
+    font-weight: bold;
+    box-shadow: 0px 13px 21px 0px rgba(111, 111, 111, 0.192);
+}
+
+div.postFeed {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 25px 50px;
+    width: auto;
+    transition: 0.5s ease-in-out;
+    white-space: normal;
+}
+
+div.postFeed:hover {
+
+    padding: 50px 50px;
+    width: auto;
+}
+
+p.comentario {
+    white-space: normal;   
+    display: block;
+    word-break: break-all;
+}
+
+::placeholder {
+    padding-left: 5px;
+}
+
+.postFeed img {
+    width: 5rem;
+    height: 5rem;
+    transition: 0.4s;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+div.postFeed .nomeApartamento {
+    color: #76bb4c;
+    font-size: 16px;
+}
+
+div.postFeed .dataHora {
+    color: #909090;
+    font-size: 16px;
+}
+
+div.postFeed p {
+    width: 542px;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 729px) {
+    div.postFeed img {
+        transition: 1s ease-in;
+        display: none;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    p.comentario {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    p.comentario {
+        display: block;
+        padding-right: 50px;
+    }
+}

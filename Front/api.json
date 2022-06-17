@@ -1,5 +1,5 @@
 {
-  "user": [
+  "users": [
     {
       "nome": "Felipe Matheus",
       "email": "felipe774@gmail.com",
@@ -15,6 +15,44 @@
       "confirmarSenha": "123456",
       "ap": 85,
       "id": 2
+    },
+    {
+      "email": "felipe85@gmail.com",
+      "password": "$2a$10$rKV1s8LA5nYXzagFgxhlZ.9fDOP78qVXzBl7ap2uKTjdevwOU5UVe",
+      "nome": "Felipe Matheus",
+      "ap": 20,
+      "imagem": "felipe",
+      "id": 3
+    },
+    {
+      "email": "felip89@gmail.com",
+      "password": "$2a$10$vVMFiAQ5zOE/SyxVB/sf/e46L4tQwzmCCmYjMSYwLbRahZ7diNtiG",
+      "nome": "Felipe Matheus",
+      "confirmarSenha": "123456",
+      "ap": 59,
+      "imagem": "",
+      "permission": 1,
+      "id": 4
+    },
+    {
+      "email": "felipe77@gmail.com",
+      "password": "$2a$10$Jb5OSosNzAdj0ONtH/cbGOoPVo3WpkVxGZpZaOovnK5FN.jFnUPO2",
+      "nome": "Felipe Matheus",
+      "confirmarSenha": "123456789",
+      "ap": "24",
+      "imagem": "hrs",
+      "permission": 1,
+      "id": 5
+    },
+    {
+      "email": "felipe987@email.com",
+      "password": "$2a$10$M054kLchLHhzvYSaISFiCuSS2Av7IPrc8C2CEJx0C89w/Ga9aGl0q",
+      "nome": "Felipe Matheus",
+      "confirmarSenha": "123456987",
+      "ap": "98",
+      "imagem": "4587",
+      "permission": 1,
+      "id": 6
     }
   ],
   "signIn": [
@@ -23,5 +61,41 @@
       "senha": "123456",
       "id": 1
     }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "user_nome": "Felipe Matheus",
+      "user_email": "felipe987@email.com",
+      "user_ap": "98",
+      "comentario": "jhvyvuyvcuttkv",
+      "user_id": 6
+    },
+    {
+      "id": 2,
+      "user_nome": "Felipe Matheus",
+      "user_email": "felipe987@email.com",
+      "user_ap": "98",
+      "comentario": "bsubduss",
+      "user_id": 6
+    },
+    {
+      "id": 3,
+      "user_nome": "Felipe Matheus",
+      "user_email": "felipe77@gmail.com",
+      "user_ap": "24",
+      "comentario": "o id 5 passou por aqui",
+      "user_id": 5
+    },
+    {
+      "id": 4,
+      "user_nome": "Felipe Matheus",
+      "user_email": "felipe77@gmail.com",
+      "user_ap": "24",
+      "comentario": "hands on 4\n",
+      "user_id": 5
+    }
+    
+    
   ]
 }

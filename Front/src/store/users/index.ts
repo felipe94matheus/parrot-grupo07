@@ -1,40 +1,36 @@
-import {  createSlice } from '@reduxjs/toolkit';
-
-export enum Permission {
-    "Nothing",
-    "User",
-    "Admin"
-}
-
-interface UserState {
-    isLogged: boolean,
-    accessToken: string,
-    permission: Permission,
-}
+import { createSlice } from "@reduxjs/toolkit"
+import { Permission, UserState } from "../../components/types"
 
 const initialState: UserState = {
     isLogged: false,
     accessToken: "",
     permission: Permission.Nothing,
+    id: undefined
 }
 
 const usersSlice = createSlice({
-    name: '@user',
+    name: "@user",
     initialState,
     reducers: {
-        signIn(state, action){
+        //SignIn
+        signIn(state, action) {
             Object.assign(state, {
                 isLogged: true,
                 accessToken: action.payload.accessToken,
                 permission: Permission[action.payload.permission],
+                id: action.payload.user.id,
+                nome: action.payload.user.nome,
+                email: action.payload.user.email,
+                ap: action.payload.user.ap
             })
         },
-        sigOut(state){
+        //SignOut
+        signOut(state) {
             Object.assign(state, initialState)
         }
     }
 })
 
-export const { signIn, sigOut } = usersSlice.actions;
+export const { signIn, signOut } = usersSlice.actions
 
 export default usersSlice.reducer;
