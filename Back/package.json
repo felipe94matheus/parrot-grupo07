@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "dev": "nodemon src/server.js",
-    "create db": "npx sequelize-cli db:create",
+    "createdb": "npx sequelize-cli db:create",
     "migrations": "npx sequelize-cli db:migrate",
     "seeders": "npx sequelize-cli db:seed:all"
   },
