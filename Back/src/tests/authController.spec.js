@@ -51,7 +51,7 @@ describe('No authController, ao executar a função login', () =>{
         const response = await supertest(app)
             .post("/login")
             .send({
-                email:"email2@email.com",
+                email:"email3@email.com",
                 password:"senhasecreta"
             })
         expect(response.status).toBe(401)

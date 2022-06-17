@@ -41,7 +41,7 @@ describe ('testes unitários authService', () => {
 
     describe('método login', () => {
         const loginData = {
-            "email":"email@email.com",
+            "email":"email3@email.com",
             "senha":"senhasecreta"
         }
 
@@ -50,8 +50,8 @@ describe ('testes unitários authService', () => {
             "senha":"senhasecreta"
         }
 
-        test('deve retornar 1', async ()=>{
-            expect(await AuthService.login(loginData)).toMatchObject({"adm": false, "appartment": 301,"email": "email@email.com","name": "Laura", "password": "$2a$10$bgCt0K3NeabwDhEIPulmweKS/dxiWAkQlQZwBBHnKUogKyTNmuHU2", "status": true})
+        test('deve retornar o usuário encontrado', async ()=>{
+            expect(await AuthService.login(loginData)).toMatchObject({adm: true, appartment: 103,email: "email3@email.com",name: "teste3", status: false})
         })
 
         test('deve retornar null', async ()=>{

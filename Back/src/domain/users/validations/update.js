@@ -4,7 +4,7 @@ const updateValidation = validate({
     body:Joi.object({
         name:Joi.string().required(),
         appartment:Joi.number().required(),
-        status:Joi.boolean().required(),
+        status:Joi.boolean(),
     })
 })
 

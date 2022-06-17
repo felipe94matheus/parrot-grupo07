@@ -44,6 +44,16 @@ module.exports = {
       adm: true,
       createdAt: new Date(),
       updatedAt: new Date(),
+    },
+    {
+      name: "teste3",
+      email: "email3@email.com",
+      appartment: 103,
+      password: UserService.cripPass("senhasecreta"),
+      status: false,
+      adm: true,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }
     ])
     await queryInterface.bulkInsert("users", seed)
