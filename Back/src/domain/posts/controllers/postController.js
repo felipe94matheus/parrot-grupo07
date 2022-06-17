@@ -25,7 +25,7 @@ const PostController = {
             const { id } = req.params;
             const postsFromUser = await PostService.getUserPosts(id)
             
-            if(await PostService.isEmpty(postsFromUser)) return res.status(201).json('O usuário não contém posts')
+            if(!postsFromUser) return res.status(201).json('O usuário não contém posts')
             
             return res.status(201).json(postsFromUser)
         
@@ -42,7 +42,7 @@ const PostController = {
         try {
         
         const feed = await PostService.getAll();
-        if(await PostService.isEmpty(feed)) return res.status(201).json('No momento, não há posts para exibir')
+        if(!feed) return res.status(201).json('No momento, não há posts para exibir')
           
         return res.json(feed);
 
