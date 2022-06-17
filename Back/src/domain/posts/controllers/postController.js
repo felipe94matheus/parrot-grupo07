@@ -1,6 +1,7 @@
 const { Posts } = require("../models")
 const Sequelize = require("sequelize");
 const PostService = require("../services/postService");
+const UserService = require("../../users/services/userService")
 
 const PostController = {
 
@@ -22,6 +23,9 @@ const PostController = {
 
 
         try{
+            const findUser = await UserService.findUser(req.params)
+            if(!findUser) return res.status(404).json("Não foi possível localizar o usuário ");
+
             const { id } = req.params;
             const postsFromUser = await PostService.getUserPosts(id)
             
